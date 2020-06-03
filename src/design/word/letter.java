@@ -5,7 +5,7 @@ package design.word;
  * Copyright © 2020 young. All rights reserved.
  */
 
-public class 汉字 implements Word {
+public class letter implements Word {
     @Override
     public int analysis(String content) {
         return 0;
