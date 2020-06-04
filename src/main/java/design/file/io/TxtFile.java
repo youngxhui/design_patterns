@@ -1,14 +1,11 @@
 package design.file.io;
 
-import design.file.io.File;
-
 import java.io.*;
 
 /**
  * Create by young on 2020/6/2
  * Copyright © 2020 young. All rights reserved.
  */
-
 public class TxtFile implements File {
     @Override
     public String readContent(String path) throws IOException {
@@ -29,4 +26,22 @@ public class TxtFile implements File {
         return sb.toString();
     }
 
+    /**
+     * 将文件写出
+     * @param path 文件路径
+     * @param content 输出内容
+     * @throws IOException 当文档不存在的时候进行输出。
+     */
+    @Override
+    public void output(String path, String content) throws IOException {
+        java.io.File file = new java.io.File(path);
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+        BufferedWriter out = new BufferedWriter(new FileWriter(file));
+        out.write(content);
+        out.flush();
+        out.close();
+
+    }
 }

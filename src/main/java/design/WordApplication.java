@@ -18,6 +18,7 @@ public class WordApplication {
     /**
      * 每个功能的步骤基本一致
      *
+     * @param config 基本配置
      * @throws IOException IO 出现问题
      */
     public void run(ApplicationConfig config) throws IOException {
@@ -27,9 +28,13 @@ public class WordApplication {
         Text text = config.getText();
         // 分析内容
         Map<Object, Integer> analysis = text.analysis(content);
-        System.out.println(analysis);
-        File outputFile = config.getOutputFile();
+        StringBuilder sb = new StringBuilder();
+        analysis.forEach((key, value) -> {
+            sb.append(key).append(":").append(value).append("\n");
+        });
 
+        File outputFile = config.getOutputFile();
+        outputFile.output(config.getOutputPath(), sb.toString());
     }
 
 

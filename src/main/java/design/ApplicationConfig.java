@@ -10,6 +10,8 @@ import design.word.Text;
 
 public class ApplicationConfig {
 
+    private int limit = 0;
+
     private File inputFile;
 
     private String inputPath;
@@ -65,6 +67,15 @@ public class ApplicationConfig {
 
     public String getOutputPath() {
         return outputPath;
+    }
+
+    public int getLimit() {
+        return limit;
+    }
+
+    public ApplicationConfig setLimit(int limit) {
+        this.limit = limit;
+        return this;
     }
 }
 

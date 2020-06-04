@@ -16,4 +16,6 @@ public interface File {
      * @return 文本内容
      */
     String readContent(String path) throws IOException;
+
+    void output(String path,String content) throws IOException;
 }

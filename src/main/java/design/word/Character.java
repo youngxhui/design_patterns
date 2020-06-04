@@ -15,6 +15,10 @@ public class Character implements Text {
     @Override
     public Map<Object, Integer> analysis(String content) {
         for (int i = 0; i < content.length(); i++) {
+            if (!java.lang.Character.isLetter(content.charAt(i))) {
+                continue;
+            }
+
             if (characterPool.containsKey(content.charAt(i))) {
                 characterPool.put(content.charAt(i), characterPool.get(content.charAt(i)) + 1);
             } else {
