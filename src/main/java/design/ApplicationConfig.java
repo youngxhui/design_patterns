@@ -1,7 +1,7 @@
 package design;
 
 import design.file.io.File;
-import design.word.Text;
+import design.word.Content;
 
 /**
  * Create by young on 2020/6/4
@@ -20,7 +20,7 @@ public class ApplicationConfig {
 
     private String outputPath;
 
-    private Text text;
+    private Content content;
 
     public File getInputFile() {
         return inputFile;
@@ -40,12 +40,12 @@ public class ApplicationConfig {
         return this;
     }
 
-    public Text getText() {
-        return text;
+    public Content getContent() {
+        return content;
     }
 
-    public ApplicationConfig setText(Text text) {
-        this.text = text;
+    public ApplicationConfig setContent(Content content) {
+        this.content = content;
         return this;
     }
 

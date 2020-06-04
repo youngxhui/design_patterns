@@ -8,7 +8,7 @@ import java.util.Map;
  * Copyright © 2020 young. All rights reserved.
  */
 
-public class Character implements Text {
+public class Character implements Content {
 
     private final Map<Object, Integer> characterPool = new HashMap<>();
 
