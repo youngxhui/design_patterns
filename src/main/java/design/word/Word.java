@@ -12,7 +12,7 @@ import java.util.Map;
  * Copyright © 2020 young. All rights reserved.
  * 所有字的抽象接口，包含统计方法
  */
-public class Word implements Text {
+public class Word implements Content {
 
     private final Map<Object, Integer> wordPool = new HashMap<>();
 
