@@ -8,6 +8,6 @@ import java.util.Map;
  */
 
 public interface Content {
-    Map<Object, Integer> analysis(String content);
+    Map<Object, String> analysis(String content,int limit);
 
 }

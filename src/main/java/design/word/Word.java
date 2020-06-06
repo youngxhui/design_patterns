@@ -14,28 +14,53 @@ import java.util.Map;
  */
 public class Word implements Content {
 
-    private final Map<Object, Integer> wordPool = new HashMap<>();
+    private final Map<Object, String> wordPool = new HashMap<>();
 
     @Override
-    public Map<Object, Integer> analysis(String content) {
+    public Map<Object, String> analysis(String content,int limit) {
+        Map<Object,String> result = new HashMap<>();
+        // 分段
+        String[] paragraphs = content.split("\n");
+        for (int i = 0; i < paragraphs.length; i++) {
+            int offset = 1;
+            String paragraph = paragraphs[i];
+            List<Term> termList = IndexTokenizer.segment(paragraph);
+            int p = i + 1;
+            for (Term term : termList) {
+                System.out.print(term.word + " ");
 
+                if (term.word.trim().isEmpty()) {
+                    continue;
+                }
+                if (wordPool.containsKey(term.word)) {
+                    String v = wordPool.get(term.word);
+                    String[] fields = v.split("/");
+                    int count = Integer.parseInt(fields[0]);
+                    count += 1;
 
-        List<Term> termList = IndexTokenizer.segment(content);
-        for (Term term : termList) {
-            if (term.word.trim().isEmpty()) {
-                continue;
-            }
-            if (term.word.trim().equals("\n")) {
-                continue;
-            }
-
-
-            if (wordPool.containsKey(term.word)) {
-                wordPool.put(term.word, wordPool.get(term.word) + 1);
-            } else {
-                wordPool.put(term.word, 1);
+                    String value = count + "/" + fields[1] + "(" + p + "," + offset + ")";
+                    wordPool.put(term.word, value);
+                } else {
+                    wordPool.put(term.word, "1/(" + p + "," + offset + ")");
+                }
+                offset += 1;
             }
         }
-        return wordPool;
+        for (Map.Entry<Object, String> word : wordPool.entrySet()) {
+            String[] fields = word.getValue().split("/");
+            int count = Integer.parseInt(fields[0]);
+            // 过滤标点符号
+            if (word.getKey().equals("。")) {
+                continue;
+            }
+
+
+            if (count > limit) {
+                String value = count + "/" + fields[1];
+                result.put(word.getKey(), value);
+            }
+        }
+
+        return result;
     }
 }
