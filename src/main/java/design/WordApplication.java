@@ -27,8 +27,10 @@ public abstract class WordApplication {
         File file = config.getInputFile();
         String content = file.readContent(config.getInputPath());
         Content text = config.getContent();
+
         // 分析内容
         Map<Object, String> analysis = text.analysis(content,config.getLimit());
+        System.out.println(analysis);
         // 输出格式定制
         String format = format(analysis);
         // 输出内容

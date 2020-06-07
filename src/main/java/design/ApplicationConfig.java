@@ -10,6 +10,8 @@ import design.word.Content;
 
 public class ApplicationConfig {
 
+    public  static ApplicationConfig INSTANCE = new ApplicationConfig();
+
     private int limit = 0;
 
     private File inputFile;
@@ -76,6 +78,13 @@ public class ApplicationConfig {
     public ApplicationConfig setLimit(int limit) {
         this.limit = limit;
         return this;
+    }
+
+    private ApplicationConfig() {
+    }
+
+    private static ApplicationConfig getInstance() {
+        return INSTANCE;
     }
 }
 

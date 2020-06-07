@@ -23,6 +23,9 @@ public class TxtFile implements File {
             sb.append(line);
             line = br.readLine(); // 一次读入一行数据
         }
+        br.close();
+        reader.close();
+
         return sb.toString();
     }
 

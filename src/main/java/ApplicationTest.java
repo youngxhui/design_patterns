@@ -23,6 +23,4 @@ public class ApplicationTest extends WordApplication {
         });
         return sb.toString();
     }
-
-
 }

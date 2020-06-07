@@ -17,8 +17,8 @@ public class Word implements Content {
     private final Map<Object, String> wordPool = new HashMap<>();
 
     @Override
-    public Map<Object, String> analysis(String content,int limit) {
-        Map<Object,String> result = new HashMap<>();
+    public Map<Object, String> analysis(String content, int limit) {
+        Map<Object, String> result = new HashMap<>();
         // 分段
         String[] paragraphs = content.split("\n");
         for (int i = 0; i < paragraphs.length; i++) {
@@ -27,7 +27,6 @@ public class Word implements Content {
             List<Term> termList = IndexTokenizer.segment(paragraph);
             int p = i + 1;
             for (Term term : termList) {
-                System.out.print(term.word + " ");
 
                 if (term.word.trim().isEmpty()) {
                     continue;
