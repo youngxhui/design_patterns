@@ -11,7 +11,7 @@ import java.util.Map;
  * Copyright © 2020 young. All rights reserved.
  * 应用的模板
  */
-public abstract class WordApplication {
+public abstract class Application {
 
 
     public abstract String format(Map<Object, String> analysis);

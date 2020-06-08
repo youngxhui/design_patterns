@@ -8,8 +8,6 @@ import java.util.*;
  */
 public class Paper implements Content {
 
-    private Content word = new Word();
-
 
     /**
      * 对比文章的内容
@@ -20,47 +18,71 @@ public class Paper implements Content {
      */
     @Override
     public Map<Object, String> analysis(String content, int limit) {
-
+        Map<Object, String> objectStringMap = new HashMap<>();
         String[] split = content.split("/@@");
-        System.out.println(split.length);
-        List<Map<Object, String>> list = new ArrayList<>();
+        List<Map<String, Integer>> list = new ArrayList<>();
+        int fileIndex = 1;
         for (String s : split) {
-
+            Content word = new Word();
+            Map<String, Integer> result = new HashMap<>();
             Map<Object, String> analysis = word.analysis(s, 0);
-            list.add(analysis);
+            for (Map.Entry<Object, String> entry : analysis.entrySet()) {
+                String[] fields = entry.getValue().split("/");
+                int num = Integer.parseInt(fields[0]);
+                result.put(entry.getKey().toString(), num);
+            }
+            list.add(result);
 
+            objectStringMap.put("content"+fileIndex, s);
+
+            fileIndex += 1;
         }
-        calJackcardSim(list.get(0), list.get(1));
+        double similarity = similarity(list.get(0), list.get(1));
 
-        return null;
+        objectStringMap.put("similarity", String.valueOf(similarity));
+        return objectStringMap;
     }
 
-    /**
-     * 相似度计算
-     * @param paper1 文章1
-     * @param paper2 文章2
-     */
-    private void calJackcardSim(Map<Object, String> paper1, Map<Object, String> paper2) {
-        Set<String> all = new HashSet<>();
 
-        Set<String> set = new HashSet<>();
-        for (Map.Entry<Object, String> entry : paper1.entrySet()) {
-            all.add(entry.getKey().toString());
-        }
-        for (Map.Entry<Object, String> entry : paper2.entrySet()) {
-            all.add(entry.getKey().toString());
-            set.add(entry.getKey().toString());
-        }
-        Set<String> both = new HashSet<>();
-        for (Map.Entry<Object, String> entry : paper1.entrySet()) {
-            all.add(entry.getKey().toString());
+    private double dotProduct(
+            final Map<String, Integer> profile1,
+            final Map<String, Integer> profile2) {
+
+        // Loop over the smallest map
+        Map<String, Integer> small_profile = profile2;
+        Map<String, Integer> large_profile = profile1;
+        if (profile1.size() < profile2.size()) {
+            small_profile = profile1;
+            large_profile = profile2;
         }
 
-        both.retainAll(set);
+        double agg = 0;
+        for (Map.Entry<String, Integer> entry : small_profile.entrySet()) {
+            Integer i = large_profile.get(entry.getKey());
+            if (i == null) {
+                continue;
+            }
+            agg += 1.0 * entry.getValue() * i;
+        }
 
+        return agg;
+    }
 
-        System.out.println(both.size() / (double)all.size());
+    private double norm(final Map<String, Integer> profile) {
+        double agg = 0;
 
+        for (Map.Entry<String, Integer> entry : profile.entrySet()) {
+            agg += 1.0 * entry.getValue() * entry.getValue();
+        }
 
+        return Math.sqrt(agg);
+    }
+
+    public final double similarity(
+            final Map<String, Integer> profile1,
+            final Map<String, Integer> profile2) {
+
+        return dotProduct(profile1, profile2)
+                / (norm(profile1) * norm(profile2));
     }
 }
