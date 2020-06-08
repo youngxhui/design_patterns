@@ -1,6 +1,5 @@
 package design.file.io;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -17,5 +16,5 @@ public interface File {
      */
     String readContent(String path) throws IOException;
 
-    void output(String path,String content) throws IOException;
+    void output(String path, String content) throws IOException;
 }
