@@ -1,12 +1,11 @@
 package design.file.io;
 
+import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.List;
 
 /**
@@ -53,7 +52,18 @@ public class WordFile implements File {
 
 
     @Override
-    public void output(String path, String content) {
-
+    public void output(String path, String content) throws IOException {
+        XWPFDocument document = new XWPFDocument();
+        FileOutputStream out = new FileOutputStream(new java.io.File(path));
+        XWPFParagraph titleParagraph = document.createParagraph();
+        titleParagraph.setAlignment(ParagraphAlignment.CENTER);
+        XWPFRun xwpfRun = titleParagraph.createRun();
+        xwpfRun.setText("相似度文本结果");
+        xwpfRun.setFontSize(20);
+        XWPFParagraph contentParagraph = document.createParagraph();
+        XWPFRun run = contentParagraph.createRun();
+        run.setText(content);
+        document.write(out);
+        document.close();
     }
 }

@@ -11,7 +11,7 @@ import java.util.Map;
  * Copyright © 2020 young. All rights reserved.
  * 应用的模板
  */
-public abstract class WordApplication {
+public abstract class Application {
 
 
     public abstract String format(Map<Object, String> analysis);
@@ -29,8 +29,7 @@ public abstract class WordApplication {
         Content text = config.getContent();
 
         // 分析内容
-        Map<Object, String> analysis = text.analysis(content,config.getLimit());
-        System.out.println(analysis);
+        Map<Object, String> analysis = text.analysis(content, config.getLimit());
         // 输出格式定制
         String format = format(analysis);
         // 输出内容

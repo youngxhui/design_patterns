@@ -3,6 +3,7 @@ package design.word;
 import com.hankcs.hanlp.seg.common.Term;
 import com.hankcs.hanlp.tokenizer.IndexTokenizer;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,9 @@ import java.util.Map;
  * 所有字的抽象接口，包含统计方法
  */
 public class Word implements Content {
+
+    private final List<java.lang.Character> stopWord = new ArrayList<java.lang.Character>();
+
 
     private final Map<Object, String> wordPool = new HashMap<>();
 
@@ -28,6 +32,10 @@ public class Word implements Content {
             int p = i + 1;
             for (Term term : termList) {
 
+                if (term.nature.toString().equals("w")) {
+                    System.out.println(term);
+                    continue;
+                }
                 if (term.word.trim().isEmpty()) {
                     continue;
                 }
@@ -54,7 +62,7 @@ public class Word implements Content {
             }
 
 
-            if (count > limit) {
+            if (count >= limit) {
                 String value = count + "/" + fields[1];
                 result.put(word.getKey(), value);
             }
