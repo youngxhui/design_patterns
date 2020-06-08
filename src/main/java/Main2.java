@@ -1,8 +1,8 @@
 import design.Application;
 import design.ApplicationConfig;
-import design.file.io.MultiFile;
-import design.file.io.WordFile;
-import design.word.Paper;
+import design.DefaultApplication;
+import design.file.io.TxtFile;
+import design.word.Word;
 
 import java.io.IOException;
 
@@ -15,10 +15,12 @@ public class Main2 {
 
     public static void main(String[] args) throws IOException {
         ApplicationConfig instance = ApplicationConfig.INSTANCE;
-        instance.setInputFile(new MultiFile()).setInputPath("d:/1.docx,d:/2.docx");
-        instance.setContent(new Paper());
-        instance.setOutputFile(new WordFile()).setOutputPath("d:/out.docx");
-        Application application = new ApplicationWordDoc();
+        instance.setInputFile(new TxtFile()).setInputPath("d:/1.txt");
+        instance.setContent(new Word());
+        instance.setOutputFile(new TxtFile()).setOutputPath("d:/2out.txt");
+        instance.setLimit(3);
+        Application application = new DefaultApplication();
+
         application.run(instance);
     }
 

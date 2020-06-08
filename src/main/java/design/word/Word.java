@@ -54,7 +54,7 @@ public class Word implements Content {
             }
 
 
-            if (count > limit) {
+            if (count >= limit) {
                 String value = count + "/" + fields[1];
                 result.put(word.getKey(), value);
             }
