@@ -7,14 +7,14 @@ import java.util.Map;
  * Copyright © 2020 young. All rights reserved.
  */
 
-public class ApplicationWordDoc extends Application {
+public class ApplicationWordDoc extends Application {  //相似度输出格式
     @Override
     public String format(Map<Object, String> analysis) {
         StringBuilder sb = new StringBuilder();
         String similarity = analysis.get("similarity");
         sb.append("文本相似度：").append(similarity);
         float similary = Float.parseFloat(similarity);
-        if (similary >= 0.8f) {
+        if (similary >= 0.8f) {   //similary相似度值
             sb.append("内容高度相似");
         }
         if (similary >= 0.3f && similary < 0.8f) {

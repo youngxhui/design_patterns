@@ -7,7 +7,7 @@ import java.util.Map;
  * Copyright © 2020 young. All rights reserved.
  */
 
-public class ApplicationWordTxt  extends Application {
+public class ApplicationWordTxt  extends Application {   //输出格式
     @Override
     public String format(Map<Object, String> analysis) {
         StringBuilder sb = new StringBuilder();

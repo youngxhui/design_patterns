@@ -21,8 +21,8 @@ public class Paper implements Content {
         Map<Object, String> objectStringMap = new HashMap<>();
         String[] split = content.split("/@@");
         List<Map<String, Integer>> list = new ArrayList<>();
-        int fileIndex = 1;
-        for (String s : split) {
+        int fileIndex = 1;   //第一篇
+        for (String s : split) {   //分词完统计的结果，有行数，不需要，去掉他，放到新的list
             Content word = new Word();
             Map<String, Integer> result = new HashMap<>();
             Map<Object, String> analysis = word.analysis(s, 0);
@@ -33,17 +33,17 @@ public class Paper implements Content {
             }
             list.add(result);
 
-            objectStringMap.put("content"+fileIndex, s);
+            objectStringMap.put("content"+fileIndex, s);   //当前文章存放进去，s内容，
 
-            fileIndex += 1;
+            fileIndex += 1;  //篇数累加
         }
-        double similarity = similarity(list.get(0), list.get(1));
+        double similarity = similarity(list.get(0), list.get(1));   //计算两篇的相似度
 
-        objectStringMap.put("similarity", String.valueOf(similarity));
+        objectStringMap.put("similarity", String.valueOf(similarity));  //结果存放
         return objectStringMap;
     }
 
-
+//相似度计算公式，余弦相似性，夹角越小，相似度越高，
     private double dotProduct(
             final Map<String, Integer> profile1,
             final Map<String, Integer> profile2) {

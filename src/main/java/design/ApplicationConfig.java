@@ -8,11 +8,11 @@ import design.word.Content;
  * Copyright © 2020 young. All rights reserved.
  */
 
-public class ApplicationConfig {
+public class ApplicationConfig {   //对路径和缺省值
 
     public  static ApplicationConfig INSTANCE = new ApplicationConfig();
 
-    private int limit = 0;
+    private int limit = 0;   //缺省值
 
     private File inputFile;
 
@@ -22,13 +22,13 @@ public class ApplicationConfig {
 
     private String outputPath;
 
-    private Content content;
+    private Content content;    //分词方式
 
     public File getInputFile() {
         return inputFile;
     }
 
-    public ApplicationConfig setInputFile(File inputFile) {
+    public ApplicationConfig setInputFile(File inputFile) {   //set值的设置，get获取值
         this.inputFile = inputFile;
         return this;
     }

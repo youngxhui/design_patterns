@@ -7,7 +7,7 @@ import java.util.*;
  * Copyright © 2020 young. All rights reserved.
  */
 
-public class ApplicationSort extends Application {
+public class ApplicationSort extends Application {  //排序，高频到低频，对format改写
 
     @Override
     public String format(Map<Object, String> analysis) {
