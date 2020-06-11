@@ -30,7 +30,6 @@ public abstract class Application {
         File file = config.getInputFile();
         String content = file.readContent(config.getInputPath());
 
-//        Content text =  config.getContent();
         Content text = contentFactory.createContent(config.getContent().getClass());
         // 分析内容
         Map<Object, String> analysis = text.analysis(content, config.getLimit());
