@@ -24,11 +24,6 @@ public class ApplicationWordDoc extends Application {  //相似度输出格式
             sb.append("内容存在相同点");
         }
 
-
-//        String content1 = analysis.get("content1");
-//        sb.append("内容文本1\r").append(content1).append((char) 11);
-//        String content2 = analysis.get("content2");
-//        sb.append("内容文本2\r").append(content2).append((char) 11);
         return sb.toString();
     }
 }

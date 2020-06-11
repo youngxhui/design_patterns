@@ -1,7 +1,9 @@
 package design;
 
+import design.factory.ContentFactory;
 import design.file.io.File;
 import design.word.Content;
+import design.word.Word;
 
 import java.io.IOException;
 import java.util.Map;
@@ -13,6 +15,7 @@ import java.util.Map;
  */
 public abstract class Application {
 
+    private ContentFactory contentFactory = new ContentFactory();
 
     public abstract String format(Map<Object, String> analysis);
 
@@ -26,8 +29,9 @@ public abstract class Application {
         // 文件读取
         File file = config.getInputFile();
         String content = file.readContent(config.getInputPath());
-        Content text = config.getContent();
 
+//        Content text =  config.getContent();
+        Content text = contentFactory.createContent(config.getContent().getClass());
         // 分析内容
         Map<Object, String> analysis = text.analysis(content, config.getLimit());
         // 输出格式定制

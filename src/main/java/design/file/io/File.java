@@ -16,5 +16,12 @@ public interface File {
      */
     String readContent(String path) throws IOException;
 
+    /**
+     * 进行文本输出
+     *
+     * @param path    路径
+     * @param content 内容
+     * @throws IOException
+     */
     void output(String path, String content) throws IOException;
 }

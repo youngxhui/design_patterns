@@ -33,7 +33,6 @@ public class Word implements Content {
             for (Term term : termList) {   //分词结果统计
 
                 if (term.nature.toString().equals("w")) {    //标点符号，去掉
-                    System.out.println(term);
                     continue;
                 }
                 if (term.word.trim().isEmpty()) {  //空，去掉
