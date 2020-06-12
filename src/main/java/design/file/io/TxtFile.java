@@ -20,7 +20,12 @@ public class TxtFile implements File {
         String line;
         line = br.readLine();
         while (line != null) {
-            sb.append(line);
+
+            if (line.trim().isEmpty()) {
+                line = br.readLine();
+                continue;
+            }
+            sb.append(line + "\n");
             line = br.readLine(); // 一次读入一行数据
         }
         br.close();
@@ -31,7 +36,8 @@ public class TxtFile implements File {
 
     /**
      * 将文件写出
-     * @param path 文件路径
+     *
+     * @param path    文件路径
      * @param content 输出内容
      * @throws IOException 当文档不存在的时候进行输出。
      */
