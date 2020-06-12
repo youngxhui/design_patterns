@@ -25,7 +25,7 @@ public class TxtFile implements File {
                 line = br.readLine();
                 continue;
             }
-            sb.append(line + "\n");
+            sb.append(line).append("\n");
             line = br.readLine(); // 一次读入一行数据
         }
         br.close();
